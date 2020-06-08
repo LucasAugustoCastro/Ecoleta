@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, ChangeEvent, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Modal, Backdrop } from '@material-ui/core';
 import {FiArrowLeft, FiCheckCircle} from 'react-icons/fi';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
@@ -8,6 +7,8 @@ import { LeafletMouseEvent } from 'leaflet';
 import api from '../../services/api';
 
 import Dropzone from '../../components/Dropzone';
+import Modal from '../../components/Modal';
+
 
 import './styles.css';
 
@@ -123,72 +124,43 @@ const CreatePoint = () => {
   const handleSubmit = useCallback((event: FormEvent) => {
     event.preventDefault();
 
-    const { name, email, whatsapp } = formData;
-    const uf = selectedUf;
-    const city = selectedCity;
-    const [latitude, longitude] = selectedPosition;
-    const items = selectedItems;
-
-    const data = new FormData();
-
-    data.append('name', name);
-    data.append('email', email);
-    data.append('whatsapp', whatsapp);
-    data.append('uf', uf);
-    data.append('city', city);
-    data.append('latitude', String(latitude));
-    data.append('longitude', String(longitude));
-    data.append('items', items.join(','));
-
-    if(selectedFile) {
-      data.append('image', selectedFile);
-
-    }
-
-    api.post('points', data);
-   
     setIsModalVisible(true);
-    setTimeout(()=> history.push('/'), 2000);
+
+    // const { name, email, whatsapp } = formData;
+    // const uf = selectedUf;
+    // const city = selectedCity;
+    // const [latitude, longitude] = selectedPosition;
+    // const items = selectedItems;
+
+    // const data = new FormData();
+
+    // data.append('name', name);
+    // data.append('email', email);
+    // data.append('whatsapp', whatsapp);
+    // data.append('uf', uf);
+    // data.append('city', city);
+    // data.append('latitude', String(latitude));
+    // data.append('longitude', String(longitude));
+    // data.append('items', items.join(','));
+
+    // if(selectedFile) {
+    //   data.append('image', selectedFile);
+
+    // }
+
+    // api.post('points', data);
+   
+    
+    // setTimeout(()=> history.push('/'), 2000);
 
   },
-  [
-    setIsModalVisible,
-    history, formData, 
-    selectedCity, 
-    selectedUf,
-    selectedFile,
-    selectedItems,
-    selectedPosition
-  ]);
+  [setIsModalVisible]);
 
   
 
 
   return (
-    <>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className="modal"
-        open={isModalVisible}
-        disableAutoFocus
-        disableEnforceFocus        
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        
-      >
-        
-        <div>
-          <FiCheckCircle id="transition-modal-title" />
-          <p id="transition-modal-description">
-            Cadastro concluído!
-          </p>
-        </div>
-        
-      </Modal>
-
-
-    
+      
     <div id="page-create-point">
       <header>
         <img src={logo} alt="Ecoleta"/>
@@ -252,7 +224,7 @@ const CreatePoint = () => {
           </legend>
 
 
-          <Map center={initialPosition} zoom={15} onClick = {handleMapClick}>
+          <Map center={initialPosition} zoom={15} onClick = {handleMapClick} style={{zIndex:5}}>
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -325,15 +297,12 @@ const CreatePoint = () => {
 
       </form>
       
-      
+      <Modal actived={isModalVisible}/>
     
     
     
     </div>
 
-     
-
-  </>
   );
 };
 
