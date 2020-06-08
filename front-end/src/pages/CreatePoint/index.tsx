@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, ChangeEvent, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import {FiArrowLeft} from 'react-icons/fi';
+import { Modal, Backdrop } from '@material-ui/core';
+import {FiArrowLeft, FiCheckCircle} from 'react-icons/fi';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
 import { LeafletMouseEvent } from 'leaflet';
@@ -30,7 +31,7 @@ const CreatePoint = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [ufs, setUfs] = useState<string[]>([]);
   const [cites, setCites] = useState<string[]>([]);
-
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [initialPosition, setInitialPosition] = useState<[number,number]>([0,0]);
 
   const [formData, setFormData] = useState({
@@ -145,16 +146,49 @@ const CreatePoint = () => {
     }
 
     api.post('points', data);
-
-    alert('Ponto de coleta criado!');
-
-    history.push('/');
+   
+    setIsModalVisible(true);
+    setTimeout(()=> history.push('/'), 2000);
 
   },
-  [selectedFile, formData, selectedUf, selectedCity, selectedPosition, selectedItems, history])
+  [
+    setIsModalVisible,
+    history, formData, 
+    selectedCity, 
+    selectedUf,
+    selectedFile,
+    selectedItems,
+    selectedPosition
+  ]);
+
+  
 
 
   return (
+    <>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className="modal"
+        open={isModalVisible}
+        disableAutoFocus
+        disableEnforceFocus        
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        
+      >
+        
+        <div>
+          <FiCheckCircle id="transition-modal-title" />
+          <p id="transition-modal-description">
+            Cadastro concluído!
+          </p>
+        </div>
+        
+      </Modal>
+
+
+    
     <div id="page-create-point">
       <header>
         <img src={logo} alt="Ecoleta"/>
@@ -287,9 +321,19 @@ const CreatePoint = () => {
         </fieldset>
 
         <button type="submit">Cadastrar ponto de coleta</button>
+        
 
       </form>
+      
+      
+    
+    
+    
     </div>
+
+     
+
+  </>
   );
 };
 
