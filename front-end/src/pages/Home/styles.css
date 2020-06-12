@@ -17,8 +17,30 @@
 }
 
 #page-home .content header {
+  width: 100%;
   margin: 48px 0 0;
+  display: flex;
+  justify-content: space-between;
 }
+
+#page-home .content header a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+#page-home .content header a svg {
+  color: #2FB86E;
+  margin-right: 16px;
+}
+
+#page-home .content header a strong {
+  font-size: 16px;
+  line-height: 19px;
+  color: #322153;
+}
+
 
 #page-home .content main {
   flex: 1;
@@ -40,22 +62,21 @@
   line-height: 38px;
 }
 
-#page-home .content main a {
+#page-home .content main button {
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
   height: 72px;
   background: var(--primary-color);
   border-radius: 8px;
-  text-decoration: none;
+  border: 0;
 
   display: flex;
   align-items: center;
-  overflow: hidden;
 
   margin-top: 40px;
 }
 
-#page-home .content main a span {
+#page-home .content main button span {
   display: block;
   background: rgba(0, 0, 0, 0.08);
   width: 72px;
@@ -67,20 +88,67 @@
   transition: background-color 0.2s;
 }
 
-#page-home .content main a span svg {
+#page-home .content main button span svg {
   color: #FFF;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
-#page-home .content main a strong {
+#page-home .content main button strong {
   flex: 1;
+  font-size: 16px;
   text-align: center;
   color: #FFF;
 }
 
-#page-home .content main a:hover {
+#page-home .content main button:hover {
   background: #2FB86E;
+}
+
+#page-home .content div strong {
+  font-size: 36px;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+#page-home .content div div {
+  display:flex;
+  flex-direction: column;
+}
+#page-home .content div div select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  flex: 1;
+  background: #F0F0F5;
+  width: 420px;
+  border-radius: 8px;
+  border: 0;
+  padding: 28px 24px;
+  font-size: 16px;
+  color: #6C6C80;
+  margin-bottom: 8px;
+}
+
+
+#page-home .content div div a {
+  
+  width: 100%;
+  max-width: 420px;
+  height: 72px;
+  background: var(--primary-color);
+  border-radius: 8px;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  margin-top: 40px;
+
+  color: #fff;
+  display: flex;
+  justify-content: center;
 }
 
 @media(max-width: 900px) {

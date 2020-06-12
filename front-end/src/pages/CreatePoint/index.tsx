@@ -121,7 +121,7 @@ const CreatePoint = () => {
 
   }, [selectedItems])
 
-  const handleSubmit = useCallback((event: FormEvent) => {
+  const handleSubmit = useCallback(async (event: FormEvent) => {
     event.preventDefault();
 
     const { name, email, whatsapp } = formData;
@@ -146,7 +146,7 @@ const CreatePoint = () => {
 
     }
 
-    api.post('points', data);
+    await api.post('points', data);
    
     setIsModalVisible(true);
     setTimeout(()=> history.push('/'), 2000);

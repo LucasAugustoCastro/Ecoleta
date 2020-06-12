@@ -1,3 +1,4 @@
+//https://www.npmjs.com/package/react-native-picker-select
 import React from 'react';
 import {AppLoading} from 'expo';
 import { StatusBar } from 'react-native';
